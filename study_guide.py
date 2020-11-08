@@ -366,3 +366,163 @@ print_len({1, 5, 10, 9, 10})  # 4 because there is a duplicate here (10)
 print_len((1, 4, 10, 9, 20))
 
 # Max will return the max number in a given scenario
+print(max(1, 2, 35, 1012, 1))
+
+# Min
+print(min(1, 5, 2, 10))
+print(min([1, 4, 7, 10]))
+
+# Sum
+print(sum([1, 2, 4]))
+
+# Any
+print(any([True, False, False]))
+print(any([False, False, False]))
+
+# All
+print(all([True, True, False]))
+print(all([True, True, True]))
+
+# Dir returns all the attributes of an object including it's methods and dunder methods
+user = {"Name": "Bob", "Email": "bob@bob.com"}
+print(dir(user))
+
+# Importing packages and modules
+#  - Module - A Python code in a file or directory
+#  - Package - A module which is a directory containing an __init__.py file
+#  - Submodule - A module which is contained within a package
+#  - Name - An exported function, class, or variable in a module
+# Unlike JS, modules export ALL names contained within them without any special export key
+
+# Assuming we have the following package with four submodules
+#  math
+#  |  __init__.py
+#  | addition.py
+#  | subtraction.py
+#  | multiplication.py
+#  | division.py
+
+# If we peek into the addition.py file we see there's an add function
+# addition.py
+# We can import 'add' from other places because it's a 'name' and is automatically exported
+def add(num1, num2):
+    return num1 + num2
+
+
+# Notice the . syntax because this package can import it's own submodules.
+# Our __init__.py has the following files
+# This imports the 'add' function
+# And now it's also re-exported in here as well
+# from .addition import add
+# These import and re-export the rest of the functions from the submodule
+# from .subtraction import subtract
+# from .division import divide
+# from .multiplication import multiply
+# So if we have a script.py and want to import add, we could do it many ways
+
+# This will load and execute the 'math/__init__.py' file and give
+# us an object with the exported names in 'math/__init__.py'
+import math
+
+# print(math.add(1,2))
+
+# This imports JUST the add from 'math/__init__.py'
+# from math import add
+
+# print(add(1, 2))
+
+# This skips importing from 'math/__init__.py' (although it still runs)
+# and imports directly from the addition.py file
+# from math.addition import add
+
+# This imports all the functions individually from 'math/__init__.py'
+# from math import add, subtract, multiply, divide
+
+# print(add(1, 2))
+# print(subtract(2, 1))
+
+# This imports 'add' renames it to 'add_some_numbers'
+# from math import add as add_some_numbers
+
+# --------------------------------------- DAY 3 ---------------------------------------
+# Classes, Methods, and Properties
+class AngryBird:
+    # Slots optimize property access and memory usage and prevent you
+    # from arbitrarily assigning new properties the instance
+    __slots__ = ["_x", "_y"]
+
+    # Constructor
+    def __init__(self, x=0, y=0):
+        # Doc String
+        """
+        Construct a new AngryBird by setting it's position to (0, 0)
+        """
+        ## Instance Variables
+        self._x = x
+        self._y = y
+
+    # Instance Method
+    def move_up_by(self, delta):
+        self._y += delta
+
+    # Getter
+    @property
+    def x(self):
+        return self._x
+
+    # Setter
+    @x.setter
+    def x(self, value):
+        if value < 0:
+            value = 0
+        self._x = value
+
+    @property
+    def y(self):
+        return self._y
+
+    @y.setter
+    def y(self, value):
+        self._y = value
+
+    # Dunder Repr... called by 'print'
+    def __repr__(self):
+        return f"<AngryBird ({self._x}, {self._y})>"
+
+
+# JS to Python Classes cheat table
+#        JS                    Python
+#   constructor()         def __init__(self):
+#      super()            super().__init__()
+#   this.property           self.property
+#    this.method            self.method()
+# method(arg1, arg2){}    def method(self, arg1, ...)
+# get someProperty(){}    @property
+# set someProperty(){}    @someProperty.setter
+
+# List Comprehensions are a way to transform a list from one format to another
+#  - Pythonic Alternative to using map or filter
+#  - Syntax of a list comprehension
+#     - new_list = [value loop condition]
+# Using a for loop
+squares = []
+for i in range(10):
+    squares.append(i ** 2)
+print(squares)
+
+# value = i ** 2
+# loop = for i in range(10)
+squares = [i ** 2 for i in range(10)]
+print(list(squares))
+
+sentence = "the rocket came back from mars"
+vowels = [character for character in sentence if character in "aeiou"]
+print(vowels)
+
+# You can also use them on dictionaries. We can use the items() method
+# for the dictionary to loop through it getting the keys and values out at once
+person = {"name": "Corina", "age": 32, "height": 1.4}
+
+# This loops through and capitalizes the first letter of all keys
+newPerson = {key.title(): value for key, value in person.items()}
+print(list(newPerson.items()))
