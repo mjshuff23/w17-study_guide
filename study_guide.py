@@ -315,9 +315,54 @@ for i in range1:
 # Filter
 isOdd = lambda num: num % 2 == 1
 
-
 filtered = filter(isOdd, [1, 2, 3, 4])
+print(list(filtered))
 for num in filtered:
     print(f"first way: {num}")
 print("--" * 20)
 [print(f"list comprehension: {i}") for i in [1, 2, 3, 4, 5, 6, 7, 8] if i % 2 == 1]
+
+# Map
+def toUpper(str):
+    return str.upper()
+
+
+upperCased = map(toUpper, ["a", "b", "c", "d"])
+print(list(upperCased))
+
+# Sorted
+sorted_items = sorted(["john", "tom", "sonny", "Mike"])
+print(list(sorted_items))  # Notice uppercase comes before lowercase
+# Using a key function to control the sorting and make it case insensitive
+sorted_items = sorted(["john", "tom", "sonny", "Mike"], key=str.lower)
+print(sorted_items)
+# You can also reverse the sort
+sorted_items = sorted(["john", "tom", "sonny", "Mike"], key=str.lower, reverse=True)
+print(sorted_items)
+
+# Enumerate creates a tuple with an index for what you're enumerating
+quarters = ["First", "Second", "Third", "Fourth"]
+print(list(enumerate(quarters)))
+print(list(enumerate(quarters, start=1)))
+
+# Zip takes list and combines them as key value pairs, or really however you need
+keys = ("Name", "Email")
+values = ("Buster", "cheetoh@johhnydepp.com")
+zipped = zip(keys, values)
+print(list(zipped))
+# You can zip more than 2
+x_coords = [0, 1, 2, 3, 4]
+y_coords = [4, 6, 10, 9, 10]
+z_coords = [20, 10, 5, 9, 1]
+coords = zip(x_coords, y_coords, z_coords)
+print(list(coords))
+
+# Len reports the length of strings along with list and any other object data type
+print_len = lambda item: print(len(item))  # doing this to save myself some typing
+
+print_len("Mike")
+print_len([1, 5, 2, 10, 3, 10])
+print_len({1, 5, 10, 9, 10})  # 4 because there is a duplicate here (10)
+print_len((1, 4, 10, 9, 20))
+
+# Max will return the max number in a given scenario
