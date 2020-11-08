@@ -1,3 +1,5 @@
+# WEEK 17 Study Guide - Run lines of code by highlighting then running in code runner extension
+
 # The None Value
 # None is the same as null in JS.  It represents the lack of existence of a value
 # Must be used with a capital letter, funcs that don't have an explicit return return None
@@ -228,3 +230,94 @@ print(append_item("notebook", []))
 #          it will throw an error
 # avg(1)  # TypeError
 # avg(1, 2, 2) # TypeError
+
+# ----------------------------------- DAY 2 ----------------------------------------
+# Functions - * to get rest of position arguments as tuple
+#           - ** to get rest of keyword arguments as a dictionary
+# Variable Length positional arguments
+def add(a, b, *args):
+    # args is a tuple of the rest of the arguments
+    total = a + b
+    for n in args:
+        total += n
+    return total
+
+
+print(add(1, 2))  # args is None, returns 3
+print(add(1, 2, 3, 4, 5, 6))  # args is (3, 4, 5, 6), returns 21
+
+# Variable Length Keyword Arguments
+def print_names_and_countries(greeting, **kwargs):
+    # kwargs is a dictionary of the rest of the keyword arguments
+    for k, v in kwargs.items():
+        print(greeting, k, "from", v)
+
+
+print_names_and_countries(
+    "Hey there", Monica="Sweden", Mike="The United States", Mark="China"
+)
+
+# We can combine all of these together
+def example2(arg1, arg2, *args, kw_1="cheese", kw_2="horse", **kwargs):
+    pass
+
+
+# Lists are mutable arrays
+empty_list = []
+roomates = ["Beau", "Delynn"]
+# List built-in function makes a list too
+specials = list()
+# We can use 'in' to test if something is in the list, like 'includes' in JS
+print(1 in [1, 2, 4])  # True
+print(2 in [1, 3, 5])  # False
+
+# Dictionaries - Similar to JS POJO's or Map, containing key value pairs
+a = {"one": 1, "two": 2, "three": 3}
+b = dict(one=1, two=2, three=3)
+# Can use 'in' on dictionaries too (for keys)
+print("one" in a)  # True
+print(3 in b)  # False
+
+# Sets - Just like JS, unordered collection of distinct objects
+bedroom = {"bed", "tv", "computer", "clothes", "playstation 4"}
+# bedroom = set("bed", "tv", "computer", "clothes", "playstation 5")
+school_bag = set(
+    ["book", "paper", "pencil", "pencil", "book", "book", "book", "eraser"]
+)
+print(school_bag)
+print(bedroom)
+# We can use 'in' on sets as wel
+print(1 in {1, 2, 3})  # True
+print(4 in {1, 3, 5})  # False
+
+# Tuples are immutable lists of items
+time_blocks = ("AM", "PM")
+colors = "red", "green", "blue"  # Parenthesis not needed but encouraged
+# The tuple built-in function can be used to convert things to tuples
+print(tuple("abc"))
+print(tuple([1, 2, 3]))
+# 'in' may be used on tuples as well
+print(1 in (1, 2, 3))  # True
+print(5 in (1, 4, 3))  # False
+
+# Ranges are immutable lists of numbers, often used with for loops
+#   - start - default: 0, first number in sequence
+#   - stop - required, next number past last number in sequence
+#   - step - default: 1, difference between each number in sequence
+range1 = range(5)  # [0,1,2,3,4]
+range2 = range(1, 5)  # [1,2,3,4]
+range3 = range(0, 25, 5)  # [0,5,10,15,20]
+range4 = range(0)  # []
+for i in range1:
+    print(i)
+
+# Built-in functions:
+# Filter
+isOdd = lambda num: num % 2 == 1
+
+
+filtered = filter(isOdd, [1, 2, 3, 4])
+for num in filtered:
+    print(f"first way: {num}")
+print("--" * 20)
+[print(f"list comprehension: {i}") for i in [1, 2, 3, 4, 5, 6, 7, 8] if i % 2 == 1]
